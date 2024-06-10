@@ -83,8 +83,10 @@ class SystemsController {
       throw new AppError("Não existe um sistema com este id em nosso banco de dados")
     }
     // Deletar o arquivo da pasta
-    const diskStorage = new DiskStorage();
-    await diskStorage.deleteFile(system.img_url, "system");
+    if(!system.img_url) {
+      const diskStorage = new DiskStorage();
+      await diskStorage.deleteFile(system.img_url, "system");
+    }
 
     await knex("systems").where({ id }).delete();
 

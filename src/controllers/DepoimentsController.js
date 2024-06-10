@@ -84,8 +84,10 @@ class DepoimentsController {
       throw new AppError("Não existe um depoimento com este id em nosso banco de dados")
     }
     // Deletar o arquivo da pasta
-    const diskStorage = new DiskStorage();
-    await diskStorage.deleteFile(depoiment.img_url, "depoiment");
+    if(depoiment.img_url) {
+      const diskStorage = new DiskStorage();
+      await diskStorage.deleteFile(depoiment.img_url, "depoiment");
+    }
 
     await knex("depoiments").where({ id }).delete();
 
