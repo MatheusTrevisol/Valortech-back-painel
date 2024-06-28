@@ -3,8 +3,7 @@ exports.up = async (knex) => {
     table.increments("id").primary();
     table.string("author");
     table.string("text");
-    table.string("img_url")
-    ;
+    table.string("img_url");
     table.string("role");
   
     table.timestamp("created_at").default(knex.fn.now());
